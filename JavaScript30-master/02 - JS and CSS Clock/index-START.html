@@ -9,6 +9,7 @@
 
     <div class="clock">
       <div class="clock-face">
+        
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
@@ -62,13 +63,37 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform:rotate(90deg);
+      transition: all 0.3s;
     }
 
   </style>
-
+  
+ 
   <script>
+    //hand hour-hand. use only .hour-hand
+    const hr_hand = document.querySelector(".hour-hand");
+    const min_hand = document.querySelector(".min-hand");
+    const sec_hand = document.querySelector(".second-hand");
 
+    function setDate(){
+      let today = new Date();
+      let hr = today.getHours();
+      let min = today.getMinutes();
+      let sec = today.getSeconds();
+      sec_hand.style.transform = `rotate(${timeToDeg(sec, 60) + 90}deg)`;
+      min_hand.style.transform = `rotate(${timeToDeg(min, 60) + 90}deg)`;
+      hr_hand.style.transform = `rotate(${timeToDeg(hr, 24) + 90}deg)`;
+      //console.log(hr, min, sec);
+      //console.log(timeToDeg(hr, 24), timeToDeg(hr, 60), timeToDeg(sec, 60));
+    }
 
+    function timeToDeg(num, max){
+      return 360 * num/max;
+    }
+
+    setInterval(setDate, 1000);
   </script>
 </body>
 </html>
