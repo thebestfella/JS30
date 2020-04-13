@@ -5,22 +5,35 @@
   <title>Scoped CSS Variables and JS</title>
 </head>
 <body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
-
+  <h2>Update CSS Variables with <span class='hlll'>JS</span></h2>
+  <button onclick = "setDefault()">Default!</button>
   <div class="controls">
     <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="20" data-sizing="px">
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <label for="blur">Bluuuur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="0" data-sizing="px">
 
-    <label for="base">Base Color</label>
+    <label for="base">Base Colooor</label>
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root{
+      --base: #ffc600;
+      --spacing: 20px;
+      --blur: 0px;
+    }
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter:blur(var(--blur));
+    }
+    .hlll{
+      color: var(--base)
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -45,6 +58,27 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+
+    function handleUpdate(){
+      //console.log(this);
+      //"dataset" is a dataset that contains all the attributes from that element
+      //in this case we have "data-size", can even create "data-xxx", as long as
+      //the name starts with "data" defined in the body      
+      const suffix = this.dataset.sizing || '';
+      
+      document.documentElement.style.setProperty(`--${this.name}`,`${this.value}${suffix}`)  
+    }
+    inputs.forEach(inp => inp.addEventListener('change',handleUpdate));
+    //inputs.forEach(input => input.addEventListener('onClick',handleUpdate));
+    function setDefault(){
+      document.documentElement.style.setProperty(`--spacing`,`20px`);  
+      document.documentElement.style.setProperty(`--blur`,`0px`);  
+      document.documentElement.style.setProperty(`--base`,`#ffc600`); 
+      document.getElementById("spacing").value = `20px`
+      document.getElementById("blur").value = `0px`
+      document.getElementById("base").value = `#ffc600`
+    }
   </script>
 
 </body>
