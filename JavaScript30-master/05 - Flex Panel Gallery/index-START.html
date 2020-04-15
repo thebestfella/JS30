@@ -26,6 +26,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -43,20 +44,40 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      /* PEDRO: take up the rest of the screen to the right, evenly distributed*/
+      flex:1;
+      justify-content:center;
+      align-items:center;
+      display:flex;
+      flex-direction: column;
     }
 
-    .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
-    .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
-    .panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
-    .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
-    .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
+    .panel1 { background-image:url(./pic/pic1.jpeg); }
+    .panel2 { background-image:url(./pic/pic2.jpeg); }
+    .panel3 { background-image:url(./pic/pic3.jpeg); }
+    .panel4 { background-image:url(./pic/pic4.jpeg); }
+    .panel5 { background-image:url(./pic/pic5.jpeg); }
 
-    /* Flex Children */
+    /* Flex items */
+
     .panel > * {
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      /*PEDRO put a border of red to check whats going on*/
+      /* border:1px solid red; */
+      /*PEDRO put flex into 3 columns per vertical strip*/
+      flex: 1 0 auto;
+      /*PEDRO justify-content:horizontal center, align-items:vertical center*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    .panel > *:first-child{transform: translateY(-100%)}
+    .panel.open-active > *:first-child{transform: translateY(0)}
+    .panel > *:last-child{transform: translateY(100%)}
+    .panel.open-active > *:last-child{transform: translateY(0)}
 
     .panel p {
       text-transform: uppercase;
@@ -70,6 +91,7 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
 
@@ -105,6 +127,20 @@
   </div>
 
   <script>
+    const panelList = document.querySelectorAll('.panel');
+
+    //when flex panel is clicked, toggle open
+    function toggleOpen(){
+      this.classList.toggle('open');
+    }
+
+    //check when flex panel is opened, (hence the flex grow finished), call this
+    function toggleActive(e){
+      if(e.propertyName.includes('flex'))
+        this.classList.toggle('open-active')
+    }
+    panelList.forEach(panel => panel.addEventListener('click',toggleOpen));
+    panelList.forEach(panel => panel.addEventListener('transitionend',toggleActive));
 
   </script>
 
