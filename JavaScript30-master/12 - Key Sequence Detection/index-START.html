@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Key Detection</title>
-  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
-</head>
-<body>
-<script>
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Key Detection</title>
+    <script
+      type="text/javascript"
+      src="https://www.cornify.com/js/cornify.js"
+    ></script>
+  </head>
+  <body>
+    <script>
+      let entered = "";
+      const answer = "baxy";
+      window.addEventListener("keyup", function (e) {
+        //keep the last 3 and add current key
+        entered = entered.slice(-3) + e.key;
+        console.log(entered);
+        if (entered === answer) {
+          //console.log("you got it!!!!");
+          cornify_add();
+        }
+      });
+    </script>
+  </body>
 </html>
