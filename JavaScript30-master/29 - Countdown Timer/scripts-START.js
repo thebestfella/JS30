@@ -27,12 +27,30 @@ function timer(seconds) {
   displayTime(seconds);
   displayTimeEndTime(then);
 
+  if (timerDisplay.classList.contains("almost"))
+    timerDisplay.classList.remove("almost");
+  if (timerDisplay.classList.contains("goal"))
+    timerDisplay.classList.remove("goal");
+
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     if (secondsLeft < 0) {
+      new Audio("alarm_long.mp3").play();
       clearInterval(countdown);
       return;
     }
+
+    //color text by check seconds left
+    if (secondsLeft < 300 && secondsLeft >= 60) {
+      if (!timerDisplay.classList.contains("almost"))
+        timerDisplay.classList.add("almost");
+    } else if (secondsLeft < 60) {
+      if (timerDisplay.classList.contains("almost"))
+        timerDisplay.classList.remove("almost");
+      if (!timerDisplay.classList.contains("goal"))
+        timerDisplay.classList.add("goal");
+    }
+
     displayTime(secondsLeft);
   }, 1000);
 }
@@ -43,7 +61,7 @@ function displayTime(seconds) {
   const dispAll = `${dspMin}:${dspSec > 9 ? "" : "0"}${dspSec}`;
   timerDisplay.innerHTML = dispAll;
   document.title = dispAll;
-  console.log(dspMin, dspSec);
+  // console.log(dspMin, dspSec);
 }
 
 function displayTimeEndTime(then) {
