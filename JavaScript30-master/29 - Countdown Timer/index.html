@@ -13,11 +13,11 @@
   <body>
     <div class="timer">
       <div class="timer__controls">
-        <button data-time="5" class="timer__button">20 Secs</button>
+        <button class="pause__button">Pause</button>
         <button data-time="300" class="timer__button">Work 5</button>
+        <button data-time="600" class="timer__button">Speed 10</button>
         <button data-time="900" class="timer__button">Quick 15</button>
-        <button data-time="1200" class="timer__button">Snack 20</button>
-        <button data-time="3600" class="timer__button">Lunch Break</button>
+        <button data-time="1200" class="timer__button">Normal 20</button>
         <form name="customForm" id="custom">
           <input type="text" name="minutes" placeholder="Enter Minutes" />
         </form>
@@ -27,7 +27,9 @@
         <p class="display__end-time"></p>
       </div>
     </div>
-
+    <script>
+      let audio = new Audio("alarm_long.mp3");
+    </script>
     <script src="scripts-START.js"></script>
   </body>
 </html>

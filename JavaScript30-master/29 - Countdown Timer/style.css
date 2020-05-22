@@ -73,6 +73,20 @@ body {
   font-family: "Inconsolata", monospace;
 }
 
+.pause__button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: white;
+  font-size: 2rem;
+  text-transform: uppercase;
+  background: rgba(204, 204, 0, 0.8);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  font-family: "Inconsolata", monospace;
+}
+
 .timer__button:hover,
 .timer__button:focus {
   background: rgba(0, 0, 0, 0.2);
